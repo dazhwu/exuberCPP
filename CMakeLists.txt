@@ -10,15 +10,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 project(gsadf VERSION 0.1.0)
 
 
-set(CMAKE_CXX_FLAGS "-Wall -O3 -m64 -fopenmp  -mavx -mfma  -march=native ")
+set(CMAKE_CXX_FLAGS "-Wall -fPIC  -shared -O3 -m64 -fopenmp -DNDEBUG -mfma  -march=native ")
 #-m64 -fopenmp -march=native  -mavx2 -DNDEBUG
 
 # Include dir
-include_directories(/usr/local/include)
-include_directories(/usr/include/eigen3)
-include_directories(/usr/include/eigen3/unsupported)
-include_directories(/home/rstudio/gsadf_CPP/libcxxwrap-julia/include)
-include_directories(/opt/julia-1.9.0/include/julia)
+#include_directories(/usr/local/include)
+include_directories(/mingw64/include/eigen3)
+#include_directories(/usr/include/eigen3/unsupported)
+#include_directories(/opt/julia-1.9.0/include/julia)
 
 set(LIB_OUT "lib")
 

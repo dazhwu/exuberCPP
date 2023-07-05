@@ -5,13 +5,13 @@ using Plots
 using CSV
 #using HypothesisTests
 using BenchmarkTools
-
+using Distributed
 
 
 include("exuberCPP.jl")
 #import ._exuber
 
-df_long = CSV.read("/home/rstudio/gsadf_CPP/ori.csv", DataFrame)
+df_long = CSV.read("ori.csv", DataFrame)
 #df_long = CSV.read("./data/bubbles.csv", DataFrame)
 
 #df_long = CSV.read("./data/growth.csv", DataFrame)
@@ -32,5 +32,5 @@ println("Time elapsed: ", now() - start_time)
 
 
 
-@time a = _exuber.CV_PSY(1000, 100, 0, 1)
+@time a = _exuber.CV_PSY(300, 1000, 0, 0)
 

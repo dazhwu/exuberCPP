@@ -11,26 +11,33 @@
 #include <tuple>
 #include <vector>
 #include <Eigen/Dense>
-#include "jlcxx/jlcxx.hpp"
+// #include "jlcxx/jlcxx.hpp"
 
-using std::cout;
-using std::endl;
-using std::string;
-using std::tuple;
-using std::vector;
-
-using Eigen::Map;
-using Eigen::MatrixXd;
-using Eigen::Ref;
-using Eigen::VectorXd;
-
-int default_win_size(int obs);
-std::tuple<MatrixXd, VectorXd> get_reg(VectorXd &y, int adflag);
-void rls_multi(VectorXd &, MatrixXd &, jlcxx::ArrayRef<double>, jlcxx::ArrayRef<double>, int);
-void rls_zero(VectorXd &y, VectorXd &, jlcxx::ArrayRef<double>, jlcxx::ArrayRef<double>, int);
-void rls_gsadf(jlcxx::ArrayRef<double>, int, int, jlcxx::ArrayRef<double>, jlcxx::ArrayRef<double>);
-
-JLCXX_MODULE define_julia_module(jlcxx::Module& mod)
+#ifdef __cplusplus
+extern "C"
 {
-  mod.method("rls_gsadf", &rls_gsadf);
+#endif
+
+  using std::cout;
+  using std::endl;
+  using std::string;
+  using std::tuple;
+  using std::vector;
+
+  using Eigen::ArrayXd;
+  using Eigen::Map;
+  using Eigen::MatrixXd;
+  using Eigen::Ref;
+  using Eigen::VectorXd;
+
+  int default_win_size(int obs);
+  void rls_multi(const Ref<const VectorXd> &, const Ref<const MatrixXd> &, double, double *, int, int);
+  // void rls_zero(const Ref<const VectorXd> &, const Ref<const VectorXd> &, double *, double *, int, int);
+  void rls_zero(const Ref<const ArrayXd> &, const Ref<const ArrayXd> &, double *, double *, int, int);
+  void rls_gsadf(double *, int, int, int, double *, double *);
+  std::tuple<MatrixXd, VectorXd> get_reg(const Ref<const VectorXd> &, int adflag);
+
+#ifdef __cplusplus
 }
+
+#endif
